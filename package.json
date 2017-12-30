@@ -1,6 +1,6 @@
 {
   "name": "mix-setup",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple utility to setup laravel-mix",
   "main": "index.js",
   "preferGlobal": true,
