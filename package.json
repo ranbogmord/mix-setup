@@ -1,0 +1,12 @@
+{
+  "name": "mix-setup",
+  "version": "1.0.0",
+  "description": "Simple utility to setup laravel-mix",
+  "main": "index.js",
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Eriksson <root@ranbogmord.com>",
+  "license": "MIT"
+}
