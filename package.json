@@ -1,6 +1,6 @@
 {
   "name": "mix-setup",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple utility to setup laravel-mix",
   "main": "index.js",
   "preferGlobal": true,
@@ -10,5 +10,8 @@
   },
   "repository": "https://github.com/ranbogmord/mix-setup.git",
   "author": "John Eriksson <root@ranbogmord.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.12.2"
+  }
 }
