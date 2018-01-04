@@ -4,9 +4,10 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const fs = require('fs');
 const program = require('commander');
+const pkgjson = require("./package");
 
 program
-  .version('1.0.3')
+  .version(pkgjson.version)
   .usage('[options] [path]')
   .option('-o, --output <path>', 'Path mix should be setup in')
   .parse(process.argv);
