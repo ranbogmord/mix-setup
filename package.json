@@ -10,5 +10,8 @@
   },
   "repository": "https://github.com/ranbogmord/mix-setup.git",
   "author": "John Eriksson <root@ranbogmord.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.12.2"
+  }
 }

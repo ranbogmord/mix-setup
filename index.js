@@ -3,6 +3,38 @@
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const fs = require('fs');
+const program = require('commander');
+const pkgjson = require("./package");
+
+program
+  .version(pkgjson.version)
+  .usage('[options] [path]')
+  .option('-o, --output <path>', 'Path mix should be setup in')
+  .parse(process.argv);
+
+
+let pathToUse = "";
+
+if(program.output || program.args.length > 0) {
+  if(program.output) {
+    pathToUse = program.output;
+  } else {
+    pathToUse = program.args[0];
+  }
+
+  if(!fs.existsSync(pathToUse)) {
+    console.log("Error: " + pathToUse + " does not exist.");
+    process.exit(1);
+  }
+
+  let stat = fs.statSync(pathToUse);
+  if(!stat.isDirectory()) {
+    console.log("Error: " + pathToUse + " is not a directory.");
+    process.exit(1);
+  }
+
+  process.chdir(pathToUse);
+}
 
 const currentDir = process.cwd();
 const packagePath = `${currentDir}/package.json`;
