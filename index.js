@@ -10,8 +10,8 @@ program
   .version(pkgjson.version)
   .usage('[options] [path]')
   .option('-o, --output <path>', 'Path mix should be setup in')
+  .option('--no-scripts', 'Do not include scripts')
   .parse(process.argv);
-
 
 let pathToUse = "";
 
@@ -53,17 +53,19 @@ const setupMix = async () => {
   let content = fs.readFileSync(packagePath);
   let pack = JSON.parse(content);
 
-  pack = Object.assign(pack, {
-    scripts: {
-      dev: "npm run development",
-      development: "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-      watch: "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-      "watch-poll": "npm run watch -- --watch-poll",
-      hot: "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-      prod: "npm run production",
-      production: "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
-    }
-  });
+  if(program.scripts) {
+    pack = Object.assign(pack, {
+      scripts: {
+        dev: "npm run development",
+        development: "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        watch: "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch-poll": "npm run watch -- --watch-poll",
+        hot: "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        prod: "npm run production",
+        production: "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+      }
+    });
+  }
 
   content = JSON.stringify(pack, null, 2);
   fs.writeFileSync(packagePath, content);
