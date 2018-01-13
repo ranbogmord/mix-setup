@@ -12,3 +12,9 @@ cd into the directory where you want to initialize mix and run the command:
 ```
 cd /path/to/project && mix-setup
 ```
+
+## Options
+```
+-o, --output <path>     Path mix should be setup in (optional)
+--no-scripts            Do not include scripts 
+```
