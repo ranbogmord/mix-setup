@@ -49,11 +49,12 @@ const setupMix = async () => {
   console.log("Installing laravel-mix");
   await exec('npm i -D cross-env laravel-mix');
 
-  console.log("Setting up commands");
-  let content = fs.readFileSync(packagePath);
-  let pack = JSON.parse(content);
-
   if(program.scripts) {
+    console.log("Setting up commands");
+
+    let content = fs.readFileSync(packagePath);
+    let pack = JSON.parse(content);
+
     pack = Object.assign(pack, {
       scripts: {
         dev: "npm run development",
@@ -65,10 +66,10 @@ const setupMix = async () => {
         production: "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
       }
     });
-  }
 
-  content = JSON.stringify(pack, null, 2);
-  fs.writeFileSync(packagePath, content);
+    content = JSON.stringify(pack, null, 2);
+    fs.writeFileSync(packagePath, content);
+  }
 
   if (!fs.existsSync(mixConfigPath)) {
     console.log("webpack.mix.js not found, creating");
